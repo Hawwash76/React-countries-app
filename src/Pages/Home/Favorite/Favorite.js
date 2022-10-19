@@ -23,9 +23,12 @@ export default function Favorite({ items, setFavorites }) {
         onDragOver={allowDrop}
         onDrop={drop}
       >
-        {items.map((item) => (
+        {/* {items.map((item) => (
           <FavoriteItem name={item.name} flag={item.flag} items={items} setFavorites={setFavorites} />
-        ))}
+        ))} */}
+                  <FavoriteItem name={"Germany"} flag={"https://flagcdn.com/de.svg"} />
+                  <FavoriteItem name={"Brazil"} flag={"https://flagcdn.com/de.svg"} />
+
       </div>
     </div>
   );

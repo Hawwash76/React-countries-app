@@ -85,6 +85,7 @@ try {
 }
 
 function App() {
+  localStorage.setItem("favorites",JSON.stringify([]))
   const [isDark, setIsDark] = useState();
   const [favorites, setFavorites] = useState(favoritesArray);
 
@@ -98,7 +99,7 @@ function App() {
       <BrowserRouter basename="/React-countries-app">
         <Routes>
           <Route
-            path="/"
+            path="/React-countries-app"
             index
             element={
               <Home
@@ -108,6 +109,7 @@ function App() {
               />
             }
           />
+         
           <Route path="country" element={<Details details={countryDetail} />} />
         </Routes>
       </BrowserRouter>
