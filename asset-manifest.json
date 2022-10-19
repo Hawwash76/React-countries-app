@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/React-countries-app/static/css/main.00012bec.css",
-    "main.js": "/React-countries-app/static/js/main.a0b17c53.js",
+    "main.js": "/React-countries-app/static/js/main.e9ab307d.js",
     "static/js/787.c1112931.chunk.js": "/React-countries-app/static/js/787.c1112931.chunk.js",
     "index.html": "/React-countries-app/index.html",
     "static/media/moon-regular.svg": "/React-countries-app/static/media/moon-regular.14fcec0f2873bd6ac5989d5e24370186.svg",
@@ -9,11 +9,11 @@
     "static/media/magnifying-glass-solid.svg": "/React-countries-app/static/media/magnifying-glass-solid.cf315284d6e0edc1c7686864aa6da0bc.svg",
     "static/media/arrow-left-solid.svg": "/React-countries-app/static/media/arrow-left-solid.24c9e4bd83cd574a8e45071e9119e6de.svg",
     "main.00012bec.css.map": "/React-countries-app/static/css/main.00012bec.css.map",
-    "main.a0b17c53.js.map": "/React-countries-app/static/js/main.a0b17c53.js.map",
+    "main.e9ab307d.js.map": "/React-countries-app/static/js/main.e9ab307d.js.map",
     "787.c1112931.chunk.js.map": "/React-countries-app/static/js/787.c1112931.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.00012bec.css",
-    "static/js/main.a0b17c53.js"
+    "static/js/main.e9ab307d.js"
   ]
 }
