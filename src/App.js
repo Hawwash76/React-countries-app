@@ -2,7 +2,7 @@ import "./App.css";
 import Header from "./Pages/Header/Header";
 import Home from "./Pages/Home/Home";
 import Details from "./Pages/Details/Details";
-import { Router,Switch,Route} from "react-router-dom";
+import { Router,Route} from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const countryDetail = {
@@ -91,7 +91,6 @@ function App() {
     <>
       <Header setIsDark={setIsDark} isDark={isDark} />
       <Router basename="/test_repository">
-        <Switch>
         <Route
               index
               path="/"
@@ -107,7 +106,6 @@ function App() {
               path="/country"
               element={<Details details={countryDetail} />}
             />
-        </Switch>
       </Router>
       {/* <BrowserRouter basename={process.env.PUBLIC_URL} >
         <HashRouter>
