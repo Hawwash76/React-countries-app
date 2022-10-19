@@ -77,7 +77,7 @@ const countriesArray = [
   },
 ];
 
-const favoritesArray = [];
+var favoritesArray = [];
 try {
   favoritesArray = JSON.parse(localStorage.getItem("favorites"));
 } catch (error) {

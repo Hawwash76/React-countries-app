@@ -59,6 +59,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+
 }
 
 .input {
@@ -139,11 +140,14 @@
   font-size: 1.3rem;
 }
 
+.card{
+}
+
 .cardText {
   display: flex;
   gap: 0.2rem;
   color: var(--Font-primary);
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.3rem;
   font-size: 0.85rem;
 }
 
@@ -151,6 +155,7 @@
   padding: 0rem !important;
   padding-inline: 1.3rem !important;
   padding-top: 1.5rem !important;
+  padding-bottom: 1.5rem !important;
 }
 
 .cardText:nth-child(1) {
@@ -177,6 +182,7 @@
   margin-right: 1rem;
   margin-bottom: 1rem;
   transition: 0.4s;
+  display: none;
 }
 
 /*------------------- Details_Main -------------------*/
@@ -212,13 +218,12 @@
 .details-content {
   margin-top: 4rem;
   display: flex;
-
 }
 
 .country-details {
   padding: 5rem;
-}
 
+}
 
 .country-details-header {
   font-size: 1.8rem;
@@ -229,6 +234,7 @@
   margin-top: 1rem;
   display: flex;
   gap: 5rem;
+  
 }
 
 .details-items p {
@@ -250,6 +256,10 @@
   align-items: center;
 }
 
+.border-countries span {
+  font-weight: var(--weight-semi);
+}
+
 .border-countries-items {
   display: flex;
   margin-left: 1rem;
@@ -262,5 +272,73 @@
   width: fit-content;
   min-width: 5rem;
   text-align: center;
+}
+
+@media only screen and (max-width: 800px) {
+
+  .favorite-wrapper {
+    display: none;
+  }
+
+  .home-filter {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+  
+  }
+
+  .input {
+    width: 100%;
+  }
+
+  .container {
+    padding: 1.5rem 1.5rem;
+  }
+
+  .header-text {
+    font-size: 1rem;
+  }
+
+  .grid-container{
+    width: 100%;
+    margin-left: 0rem !important;
+  }
+
+  .details-content {
+   flex-direction: column;
+  }
+
+  .details-items {
+   flex-direction: column;
+   gap: 2rem;
+    
+  }
+
+  .country-details {
+    padding: 0rem;
+    text-align: start;  
+    margin-top: 2rem;
+  }
+
+  .border-countries {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .border-countries-items {
+    margin-top: 1rem;
+    margin-left: 0rem;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .star-icon {
+    display: block;
+  }
+  
+  
+  .css-1biuimg-MuiCardContent-root {
+     padding-bottom: 0rem !important;
+  }
 
 }
