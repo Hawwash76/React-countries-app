@@ -93,7 +93,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route
-          path="/React-countries-app"
+          path="/React-countries-app/"
             index
             element={
               <Home
