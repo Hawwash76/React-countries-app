@@ -90,10 +90,10 @@ function App() {
   return (
     <>
       <Header setIsDark={setIsDark} isDark={isDark} />
-      <BrowserRouter>
+      <BrowserRouter basename="/React-countries-app">
         <Routes>
           <Route
-          path="/React-countries-app/"
+          path="/React-countries-app"
             index
             element={
               <Home
