@@ -90,7 +90,7 @@ function App() {
   return (
     <>
       <Header setIsDark={setIsDark} isDark={isDark} />
-      <BrowserRouter basename="/React-countries-app">
+      <BrowserRouter>
         <Routes>
           <Route
           path="/React-countries-app"
