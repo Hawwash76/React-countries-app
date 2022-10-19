@@ -77,7 +77,12 @@ const countriesArray = [
   },
 ];
 
-const favoritesArray = JSON.parse(localStorage.getItem("favorites"));
+const favoritesArray = [];
+try {
+  favoritesArray = JSON.parse(localStorage.getItem("favorites"));
+} catch (error) {
+  console.log(error);
+}
 
 function App() {
   const [isDark, setIsDark] = useState();
@@ -93,7 +98,7 @@ function App() {
       <BrowserRouter basename="/React-countries-app">
         <Routes>
           <Route
-          path="/"
+            path="/"
             index
             element={
               <Home
