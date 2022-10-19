@@ -2,7 +2,7 @@ import "./App.css";
 import Header from "./Pages/Header/Header";
 import Home from "./Pages/Home/Home";
 import Details from "./Pages/Details/Details";
-import { Router,Route} from "react-router-dom";
+import { BrowserRouter,Routes,Route} from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const countryDetail = {
@@ -90,25 +90,7 @@ function App() {
   return (
     <>
       <Header setIsDark={setIsDark} isDark={isDark} />
-      <Router basename="/test_repository">
-        <Route
-              index
-              path="/"
-              element={
-                <Home
-                  favorites={favorites}
-                  setFavorites={setFavorites}
-                  countries={countriesArray}
-                />
-              }
-            />
-            <Route
-              path="/country"
-              element={<Details details={countryDetail} />}
-            />
-      </Router>
-      {/* <BrowserRouter basename={process.env.PUBLIC_URL} >
-        <HashRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL} >
           <Routes>
             <Route
               index
@@ -126,8 +108,7 @@ function App() {
               element={<Details details={countryDetail} />}
             />
           </Routes>
-        </HashRouter>
-      </BrowserRouter> */}
+      </BrowserRouter>
     </>
   );
 }
