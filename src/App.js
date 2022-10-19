@@ -90,7 +90,7 @@ function App() {
   return (
     <>
       <Header setIsDark={setIsDark} isDark={isDark} />
-      <BrowserRouter basename={process.env.PUBLIC_URL} >
+      <BrowserRouter basename="/test_repository">
           <Routes>
             <Route
               index
