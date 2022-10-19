@@ -90,7 +90,7 @@ function App() {
   return (
     <>
       <Header setIsDark={setIsDark} isDark={isDark} />
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL} >
         {/* <HashRouter> */}
           <Routes>
             <Route
