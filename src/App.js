@@ -2,7 +2,7 @@ import "./App.css";
 import Header from "./Pages/Header/Header";
 import Home from "./Pages/Home/Home";
 import Details from "./Pages/Details/Details";
-import { BrowserRouter, Routes, Route, Router } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 const countryDetail = {
@@ -90,10 +90,11 @@ function App() {
   return (
     <>
       <Header setIsDark={setIsDark} isDark={isDark} />
-      <Router basename="/React-countries-api">
+      <BrowserRouter basename="/React-countries-app">
         <Routes>
           <Route
-            path="/"
+          path="/"
+            index
             element={
               <Home
                 favorites={favorites}
@@ -104,7 +105,7 @@ function App() {
           />
           <Route path="country" element={<Details details={countryDetail} />} />
         </Routes>
-      </Router>
+      </BrowserRouter>
     </>
   );
 }
