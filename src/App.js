@@ -18,80 +18,38 @@ const countryDetail = {
   borders: ["France", "Germany", "Netherlands"],
 };
 
-const countriesArray = [
-  {
-    flag: "https://flagcdn.com/de.svg",
-    name: "Germany",
-    population: "81,770,900",
-    region: "Europe",
-    capital: "Berlin",
-  },
-  {
-    flag: "https://flagcdn.com/us.svg",
-    name: "United States",
-    population: "323,947,000",
-    region: "Americas",
-    capital: "Washington D.C",
-  },
-  {
-    flag: "https://flagcdn.com/br.svg",
-    name: "Brazil",
-    population: "206,135,893",
-    region: "Americas",
-    capital: "Brasilia",
-  },
-  {
-    flag: "https://flagcdn.com/is.svg",
-    name: "Iceland",
-    population: "334,300",
-    region: "Europe",
-    capital: "Reykjavik",
-  },
-  {
-    flag: "https://flagcdn.com/af.svg",
-    name: "Asghanistan",
-    population: "27,657,145",
-    region: "Asia",
-    capital: "Kabul",
-  },
-  {
-    flag: "https://flagcdn.com/ax.svg",
-    name: "Alan Islands",
-    population: "28,875",
-    region: "Europe",
-    capital: "Mariehamn",
-  },
-  {
-    flag: "https://flagcdn.com/al.svg",
-    name: "Albania",
-    population: "2,886,026",
-    region: "Europe",
-    capital: "Tirana",
-  },
-  {
-    flag: "https://flagcdn.com/dz.svg",
-    name: "Algeria",
-    population: "40,400,000",
-    region: "Africa",
-    capital: "Algiers",
-  },
+const dropdownItems = [
+  "All",
+  "Favorite",
+  "Africa",
+  "America",
+  "Asia",
+  "Europe",
+  "Ocenia",
 ];
 
-var favoritesArray = [];
-try {
-  favoritesArray = JSON.parse(localStorage.getItem("favorites"));
-} catch (error) {
-  console.log(error);
-}
-
 function App() {
-  localStorage.setItem("favorites",JSON.stringify([]))
-  const [isDark, setIsDark] = useState();
-  const [favorites, setFavorites] = useState(favoritesArray);
+  const [isDark, setIsDark] = useState(false);
+  const [favorites, setFavorites] = useState([]);
+  const [countries, setCountries] = useState([]);
+  const [input, setInput] = useState("");
+
+  useEffect(() => {
+    init(setIsDark, setFavorites, setCountries);
+  }, []);
+
+  useEffect(() => {
+    changeTheme(isDark);
+    localStorage.setItem("darkStatus", JSON.stringify(isDark));
+  }, [isDark]);
 
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
+
+  useEffect(() => {
+    test(input, setCountries);
+  }, [input]);
 
   return (
     <>
@@ -105,11 +63,13 @@ function App() {
               <Home
                 favorites={favorites}
                 setFavorites={setFavorites}
-                countries={countriesArray}
+                countries={countries}
+                setInput={setInput}
+                dropdownItems={dropdownItems}
               />
             }
           />
-         
+
           <Route path="country" element={<Details details={countryDetail} />} />
         </Routes>
       </BrowserRouter>
@@ -118,3 +78,91 @@ function App() {
 }
 
 export default App;
+
+function init(setIsDark, setFavorites, setCountries) {
+  getDarkStatus(setIsDark);
+  getFavorites(setFavorites);
+  getCountries(setCountries);
+}
+
+function getDarkStatus(setIsDark) {
+  const status = JSON.parse(localStorage.getItem("darkStatus"));
+  setIsDark(status);
+}
+
+function changeTheme(isDark) {
+  if (isDark) {
+    document.documentElement.style.setProperty("--White", "#2b3945");
+    document.documentElement.style.setProperty("--Very-Light-Gray", "#202c37");
+    document.documentElement.style.setProperty("--Font-primary", "#ffffff");
+    document.documentElement.style.setProperty("--Font-secondary", "#ffffff");
+    document.documentElement.style.setProperty("--Dark-blue", "white");
+  } else {
+    document.documentElement.style.setProperty("--White", "#ffffff");
+    document.documentElement.style.setProperty("--Very-Light-Gray", "#fafafa");
+    document.documentElement.style.setProperty("--Font-primary", "black");
+    document.documentElement.style.setProperty("--Font-secondary", "grey");
+    document.documentElement.style.setProperty("--Dark-blue", "#2b3945");
+  }
+}
+
+function getFavorites(setFavorites) {
+  const favoritesArray = JSON.parse(localStorage.getItem("favorites"));
+  if (favoritesArray) {
+    setFavorites(favoritesArray);
+  }
+}
+
+async function getCountries(setCountries) {
+  const res = await fetch("https://restcountries.com/v3.1/all")
+    .then((response) => response.json())
+    .catch((err) => console.log("Error is :" + err));
+
+  for (let i = 0; i < res.length; i++) {
+    let population = res[i].population;
+    let isFavorite = false;
+
+    const object = {
+      name: res[i].name.common,
+      population: population.toLocaleString(),
+      region: res[i].region,
+      capital: res[i].capital,
+      flag: res[i].flags.svg,
+      favorites: isFavorite,
+    };
+    setCountries((items) => [...items, object]);
+  }
+}
+
+async function fetchByName(name) {
+  let arr = [];
+  const res = await fetch(
+    "https://restcountries.com/v3.1/name/" +
+      name +
+      "?fields=name,population,region,capital,flags,"
+  )
+    .then((response) => response.json())
+    .catch((err) => console.log("Error is :" + err));
+
+  for (let i = 0; i < res.length; i++) {
+    let n = res[i].population;
+
+    const object = {
+      name: res[i].name.common,
+      population: n.toLocaleString(),
+      region: res[i].region,
+      capital: res[i].capital,
+      flag: res[i].flags.svg,
+    };
+    arr.push(object);
+  }
+
+  return arr;
+}
+
+async function test(input, setCountries) {
+  if (input !== "") {
+    const arr = await fetchByName(input);
+    setCountries(arr);
+  }
+}

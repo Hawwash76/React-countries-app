@@ -91,7 +91,7 @@
   margin-right: 2rem;
   background-color: var(--White);
   padding: 1rem;
-  width: 45rem;
+  width: 20rem;
   color: var(--Font-primary);
 }
 
@@ -169,7 +169,7 @@
 
 .card-icon {
   display: flex;
-  justify-content: end;
+  justify-content:flex-end;
   /* display: none; */
 }
 

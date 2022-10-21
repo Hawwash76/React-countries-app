@@ -14,6 +14,8 @@ export default function Dropdown({ placeholder, items }) {
     setSelectValue(event.target.value);
   };
 
+  let counter=0;
+
   return (
     <FormControl hiddenLabel className="dropdown" sx={{ minWidth: 80 }}>
       <InputLabel
@@ -41,8 +43,10 @@ export default function Dropdown({ placeholder, items }) {
         }}
       >
         {items.map((item) => (
-          <MenuItem value={item}>{item}</MenuItem>
+          <MenuItem value={item} key={counter++}>{item} </MenuItem>
         ))}
+
+
       </Select>
     </FormControl>
   );

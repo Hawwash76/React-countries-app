@@ -1,4 +1,5 @@
 export default function DetailsItem({ decleration, data }) {
+  let counter=0;
   if (typeof data === "string") {
     return (
       <p className="details-item-decleration">
@@ -10,7 +11,7 @@ export default function DetailsItem({ decleration, data }) {
         <p  className="details-item-decleration">
         {decleration}:
         {data.map((item) => (
-          <span className="details-item-data">{item}</span>
+          <span key={counter++} className="details-item-data">{item}</span>
         ))}
       </p>
     );

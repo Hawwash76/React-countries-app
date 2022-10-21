@@ -8,8 +8,9 @@ import { ReactComponent as StarIcon } from "../../assets/Icons/star-solid.svg";
 export default function CountryCard({ country, favorites, setFavorites }) {
   function getInfo(event) {
     const data = {
-      name: event.target.childNodes[0].childNodes[1].childNodes[0].innerText,
-      flag: event.target.childNodes[0].childNodes[0].src,
+      name: event.target.parentNode.childNodes[0].childNodes[1].childNodes[0]
+        .innerText,
+      flag: event.target.childNodes[0].src,
     };
     event.dataTransfer.setData("text", JSON.stringify(data));
   }
@@ -37,7 +38,7 @@ export default function CountryCard({ country, favorites, setFavorites }) {
       draggable={false}
     >
       <Link
-        to={`/country?${country.name}`}
+        to={`/country?name=${country.name}`}
         className="link"
         draggable
         onDragStart={getInfo}
@@ -58,27 +59,22 @@ export default function CountryCard({ country, favorites, setFavorites }) {
           >
             {country.name}
           </Typography>
-          <Typography
-            variant="body2"
-            color="text.secondary"
-            className="card-content"
-          >
-            <div className="cardText">
-              <p>Population:</p>
-              <span>{country.population}</span>
-            </div>
-            <div className="cardText">
-              <p>Region:</p>
-              <span>{country.region}</span>
-            </div>
-            <div className="cardText">
-              <p>Capital:</p>
-              <span>{country.capital}</span>
-            </div>
-          </Typography>
+
+          <div className="cardText">
+            <p>Population:</p>
+            <span>{country.population}</span>
+          </div>
+          <div className="cardText">
+            <p>Region:</p>
+            <span>{country.region}</span>
+          </div>
+          <div className="cardText">
+            <p>Capital:</p>
+            <span>{country.capital}</span>
+          </div>
         </CardContent>
       </Link>
-      <div className="card-icon" isFavorite="false">
+      <div className="card-icon">
         <StarIcon className="star-icon" onClick={handleFavorite} />
       </div>
     </Card>

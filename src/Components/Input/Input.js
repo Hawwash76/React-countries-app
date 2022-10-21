@@ -2,10 +2,11 @@ import React from "react";
 import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 
-export default function Input({ children, placeholder }) {
+export default function Input({ children, placeholder,setInput }) {
   return (
     <>
       <TextField
+        onChange={(event)=>(setInput(event.target.value))}
         color="primary"
         sx={{
           input: {

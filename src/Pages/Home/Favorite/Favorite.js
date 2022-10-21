@@ -1,6 +1,7 @@
 import FavoriteItem from "../../../Components/FavoriteItem/FavoriteItem";
 
 export default function Favorite({ items, setFavorites }) {
+  
   const allowDrop = (event) => {
     event.preventDefault();
   };
@@ -15,6 +16,7 @@ export default function Favorite({ items, setFavorites }) {
     }
   };
 
+  let counter=0;
   return (
     <div className="favorite-wrapper rounded-border box-shadow">
       <span className="favorites-header">Favorites</span>
@@ -24,7 +26,7 @@ export default function Favorite({ items, setFavorites }) {
         onDrop={drop}
       >
         {items.map((item) => (
-          <FavoriteItem name={item.name} flag={item.flag} items={items} setFavorites={setFavorites} />
+          <FavoriteItem key={counter++} name={item.name} flag={item.flag} items={items} setFavorites={setFavorites} />
         ))}
       </div>
     </div>
