@@ -45,7 +45,7 @@ export default function App() {
   }, [dropdownValue, favorites]);
 
   useEffect(() => {
-    setModifiedContent(countries)
+    setModifiedContent(countries);
   }, [countries]);
 
   return (
@@ -121,9 +121,12 @@ function Search(input, setCountries) {
 
 function getFavorites() {
   const favoritesArray = JSON.parse(localStorage.getItem("favorites"));
-  if (favoritesArray) {
-    return favoritesArray;
+  console.log(favoritesArray);
+
+  if (!favoritesArray) {
+    favoritesArray = [];
   }
+  return favoritesArray;
 }
 
 async function getCountries() {
