@@ -42,7 +42,7 @@ export default function App() {
 
   useEffect(() => {
     Filter(dropdownValue, countries, setModifiedContent, favorites);
-  }, [dropdownValue, favorites]);
+  }, [dropdownValue]);
 
   useEffect(() => {
     setModifiedContent(countries);
