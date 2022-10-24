@@ -4,16 +4,40 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import LabelWithText from "../LabelWithText/LabelWithText";
 import { Link } from "react-router-dom";
+import { ReactComponent as StarIcon } from "../../assets/Icons/star-solid.svg";
 
-export default function HomeCard({ country }) {
-  function getInfo(event) {
+export default function HomeCard({ country, favorites, setFavorites }) {
+  let isFav = false;
+
+  if (favorites.some((item) => item.name === country.name)) {
+    isFav = true;
+  }
+
+  const getInfo = (event) => {
     const data = {
       name: country.name,
       flag: country.flag,
     };
     event.dataTransfer.setData("text", JSON.stringify(data));
-    console.log(data);
-  }
+  };
+
+  const handleFavorites = (event) => {
+    if (event.target.parentNode.classList.contains("selected")) {
+      event.target.parentNode.classList.remove("selected");
+      setFavorites(favorites.filter((item) => item.name !== country.name));
+    } else {
+      event.target.parentNode.classList.add("selected");
+      const data = {
+        name: country.name,
+        flag: country.flag,
+      };
+      const favoritesArray = favorites;
+      const found = favoritesArray.some((el) => el.name === data.name);
+      if (!found) {
+        setFavorites((favorites) => [...favorites, data]);
+      }
+    }
+  };
 
   return (
     <Card
@@ -52,6 +76,13 @@ export default function HomeCard({ country }) {
           <LabelWithText label={"Capital"} text={country.capital} />
         </CardContent>
       </Link>
+      <div className="card-icon">
+        {isFav ? (
+          <StarIcon className="star-icon selected" onClick={handleFavorites} />
+        ) : (
+          <StarIcon className="star-icon" onClick={handleFavorites} />
+        )}
+      </div>
     </Card>
   );
 }

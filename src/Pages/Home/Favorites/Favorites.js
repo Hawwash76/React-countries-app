@@ -17,14 +17,15 @@ export default function Favorite({ favorites, setFavorites }) {
       <span className="favorites-header">Favorites</span>
       <div
         className="favorites-item-container"
-        onDragOver={(event)=>(event.preventDefault())}
+        onDragOver={(event) => event.preventDefault()}
         onDrop={drop}
       >
-        {favorites.map((favorites) => (
+        {!favorites.length &&<p>Drag and Drop a country to add it to your favorites!</p>}
+        {favorites.map((item) => (
           <FavoriteItem
             key={counter++}
-            name={favorites.name}
-            flag={favorites.flag}
+            name={item.name}
+            flag={item.flag}
             favorites={favorites}
             setFavorites={setFavorites}
           />

@@ -3,6 +3,7 @@ import Dropdown from "../../Components/Dropdown/Dropdown";
 import Favorites from "./Favorites/Favorites";
 import { ReactComponent as SearchIcon } from "../../assets/Icons/magnifying-glass-solid.svg";
 import CardContainer from "./CardContainer/CardContainer";
+import Loader from "../../Components/Loader/Loader";
 
 export default function Home({
   setInput,
@@ -12,6 +13,7 @@ export default function Home({
   favorites,
   setFavorites,
   countries,
+  isLoading,
 }) {
   return (
     <div className="container home-wrapper">
@@ -31,7 +33,19 @@ export default function Home({
       </section>
       <section className="main-content">
         <Favorites favorites={favorites} setFavorites={setFavorites} />
-        <CardContainer countries={countries} />
+
+        {isLoading ? (
+          <div className="loader-container">
+            <Loader />
+          </div>
+        ) : (
+          
+          <CardContainer
+            countries={countries}
+            favorites={favorites}
+            setFavorites={setFavorites}
+          />
+        )}
       </section>
     </div>
   );

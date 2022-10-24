@@ -6,7 +6,9 @@ export default function FavoriteItem({ name, flag, favorites, setFavorites }) {
         <span>{name}</span>
       </div>
       <button
-        onClick={() => setFavorites(favorites.filter((item) => item.name !== name))}
+        onClick={() =>
+          setFavorites(favorites.filter((item) => item.name !== name))
+        }
       >
         x
       </button>

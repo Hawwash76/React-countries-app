@@ -2,8 +2,8 @@ export const Dropdown_Items = [
   "All",
   "Favorite",
   "Africa",
-  "America",
+  "Americas",
   "Asia",
   "Europe",
-  "Ocenia",
+  "Antarctic",
 ];
