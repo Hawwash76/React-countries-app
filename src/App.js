@@ -120,9 +120,7 @@ function Search(input, setCountries) {
 }
 
 function getFavorites() {
-  const favoritesArray = JSON.parse(localStorage.getItem("favorites"));
-  console.log(favoritesArray);
-
+  let favoritesArray = JSON.parse(localStorage.getItem("favorites"));
   if (!favoritesArray) {
     favoritesArray = [];
   }
