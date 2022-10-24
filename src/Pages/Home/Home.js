@@ -1,26 +1,51 @@
-import Input from "../../Components/Input/Input";
+import InputWithIcon from "../../Components/InuptWithIcon/InputWithIcon";
 import Dropdown from "../../Components/Dropdown/Dropdown";
-import Favorite from "./Favorite/Favorite";
-import Grid from "./Grid/Grid";
+import Favorites from "./Favorites/Favorites";
 import { ReactComponent as SearchIcon } from "../../assets/Icons/magnifying-glass-solid.svg";
+import CardContainer from "./CardContainer/CardContainer";
+import Loader from "../../Components/Loader/Loader";
 
-
-export default function Home({ favorites, setFavorites, countries, setInput,dropdownItems }) {
+export default function Home({
+  setInput,
+  Dropdown_Items,
+  setDropdownValue,
+  dropdownValue,
+  favorites,
+  setFavorites,
+  countries,
+  isLoading,
+}) {
   return (
     <div className="container home-wrapper">
       <section className="home-filter">
-        <Input placeholder="Search for a country..." setInput={setInput}>
+        <InputWithIcon
+          placeholder="Search for a country..."
+          setInput={setInput}
+        >
           <SearchIcon className="searchicon" />
-        </Input>
-        <Dropdown placeholder="Filter by" items={dropdownItems} />
+        </InputWithIcon>
+        <Dropdown
+          placeholder="Filter by"
+          Dropdown_Items={Dropdown_Items}
+          setDropdownValue={setDropdownValue}
+          dropdownValue={dropdownValue}
+        />
       </section>
       <section className="main-content">
-        <Favorite items={favorites} setFavorites={setFavorites} />
-        <Grid
-          items={countries}
-          favorites={favorites}
-          setFavorites={setFavorites}
-        />
+        <Favorites favorites={favorites} setFavorites={setFavorites} />
+
+        {isLoading ? (
+          <div className="loader-container">
+            <Loader />
+          </div>
+        ) : (
+          
+          <CardContainer
+            countries={countries}
+            favorites={favorites}
+            setFavorites={setFavorites}
+          />
+        )}
       </section>
     </div>
   );

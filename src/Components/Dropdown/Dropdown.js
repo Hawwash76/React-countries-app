@@ -3,19 +3,14 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
-import { useState } from "react";
 
-export default function Dropdown({ placeholder, items }) {
-  const [selectValue, setSelectValue] = useState("");
-  const [selected, setSelected] = useState("");
-
-  const handleChange = (event) => {
-    setSelected(true);
-    setSelectValue(event.target.value);
-  };
-
-  let counter=0;
-
+export default function Dropdown({
+  placeholder,
+  Dropdown_Items,
+  setDropdownValue,
+  dropdownValue,
+}) {
+  let counter = 0;
   return (
     <FormControl hiddenLabel className="dropdown" sx={{ minWidth: 80 }}>
       <InputLabel
@@ -31,22 +26,22 @@ export default function Dropdown({ placeholder, items }) {
           },
         }}
       >
-        {selected === "" && placeholder}
+        {dropdownValue === "" && placeholder}
       </InputLabel>
       <Select
-        onChange={handleChange}
-        value={selectValue}
+        onChange={(event) => setDropdownValue(event.target.value)}
+        value={dropdownValue}
         inputProps={{ "aria-label": "Without label" }}
         sx={{
           fontSize: "0.9rem",
           "& fieldset": { border: "none" },
         }}
       >
-        {items.map((item) => (
-          <MenuItem value={item} key={counter++}>{item} </MenuItem>
+        {Dropdown_Items.map((item) => (
+          <MenuItem value={item} key={counter++}>
+            {item}{" "}
+          </MenuItem>
         ))}
-
-
       </Select>
     </FormControl>
   );

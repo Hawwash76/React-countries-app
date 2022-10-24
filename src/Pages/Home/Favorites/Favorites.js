@@ -1,32 +1,34 @@
 import FavoriteItem from "../../../Components/FavoriteItem/FavoriteItem";
 
-export default function Favorite({ items, setFavorites }) {
-  
-  const allowDrop = (event) => {
-    event.preventDefault();
-  };
-
+export default function Favorite({ favorites, setFavorites }) {
   const drop = (event) => {
     event.preventDefault();
     const data = JSON.parse(event.dataTransfer.getData("text"));
-    const favoritesArray = items;
+    const favoritesArray = favorites;
     const found = favoritesArray.some((el) => el.name === data.name);
     if (!found) {
-      setFavorites((items) => [...items, data]);
+      setFavorites((favorites) => [...favorites, data]);
     }
   };
 
-  let counter=0;
+  let counter = 0;
   return (
     <div className="favorite-wrapper rounded-border box-shadow">
       <span className="favorites-header">Favorites</span>
       <div
         className="favorites-item-container"
-        onDragOver={allowDrop}
+        onDragOver={(event) => event.preventDefault()}
         onDrop={drop}
       >
-        {items.map((item) => (
-          <FavoriteItem key={counter++} name={item.name} flag={item.flag} items={items} setFavorites={setFavorites} />
+        {!favorites.length &&<p>Drag and Drop a country to add it to your favorites!</p>}
+        {favorites.map((item) => (
+          <FavoriteItem
+            key={counter++}
+            name={item.name}
+            flag={item.flag}
+            favorites={favorites}
+            setFavorites={setFavorites}
+          />
         ))}
       </div>
     </div>

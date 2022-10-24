@@ -1,31 +1,20 @@
 import { ReactComponent as MoonIcon } from "../../assets/Icons/moon-regular.svg";
+import ButtonWithIcon from "../../Components/ButtonWithIcon/ButtonWithIcon";
 
 export default function Header({ setIsDark, isDark }) {
-  function handleTheme() {
-    if (isDark) {
-      setIsDark(false);
-    } else {
-      setIsDark(true);
-    }
-  }
-
   return (
-    <header>
-      <div className="container header">
-        <div className="header-text-wrapper">
-          <span className="header-text">Where in the world</span>
-        </div>
-        <div className="header-icon-wrapper">
+    <header children className="container header">
+      <div className="header-text-wrapper">
+        <span className="header-text">Where in the world</span>
+      </div>
+      <div
+        onClick={() => {
+          isDark ? setIsDark(false) : setIsDark(true);
+        }}
+      >
+        <ButtonWithIcon text={"Dark Mode"}>
           <MoonIcon className="header-icon" />
-          <button
-            onClick={() => {
-              handleTheme();
-            }}
-            className="header-button"
-          >
-            Dark Mode
-          </button>
-        </div>
+        </ButtonWithIcon>
       </div>
     </header>
   );

@@ -1,41 +1,30 @@
 import "./App.css";
+import { useState, useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Dropdown_Items } from "./static-data.js";
 import Header from "./Pages/Header/Header";
 import Home from "./Pages/Home/Home";
 import Details from "./Pages/Details/Details";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useEffect, useState } from "react";
 
-const countryDetail = {
-  name: "Belguim",
-  nativeName: "Belgie",
-  population: 11319511,
-  region: "Europe",
-  subRegion: "Western Europe",
-  capital: "Brussels",
-  tld: ".be",
-  currencies: ["Euro"],
-  languages: ["Dutch", "French", "German"],
-  borders: ["France", "Germany", "Netherlands"],
-};
+let timeout = null;
 
-const dropdownItems = [
-  "All",
-  "Favorite",
-  "Africa",
-  "America",
-  "Asia",
-  "Europe",
-  "Ocenia",
-];
-
-function App() {
+export default function App() {
   const [isDark, setIsDark] = useState(false);
+  const [input, setInput] = useState("");
+  const [dropdownValue, setDropdownValue] = useState("");
   const [favorites, setFavorites] = useState([]);
   const [countries, setCountries] = useState([]);
-  const [input, setInput] = useState("");
+  const [modifiedContent, setModifiedContent] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    init(setIsDark, setFavorites, setCountries);
+    init(
+      setIsDark,
+      setFavorites,
+      setCountries,
+      setIsLoading,
+      setModifiedContent
+    );
   }, []);
 
   useEffect(() => {
@@ -44,16 +33,24 @@ function App() {
   }, [isDark]);
 
   useEffect(() => {
+    Search(input, setCountries);
+  }, [input]);
+
+  useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
 
   useEffect(() => {
-    test(input, setCountries);
-  }, [input]);
+    Filter(dropdownValue, countries, setModifiedContent, favorites);
+  }, [dropdownValue, favorites]);
+
+  useEffect(() => {
+    setModifiedContent(countries)
+  }, [countries]);
 
   return (
     <>
-      <Header setIsDark={setIsDark} isDark={isDark} />
+      <Header isDark={isDark} setIsDark={setIsDark} />
       <BrowserRouter basename="/React-countries-app">
         <Routes>
           <Route
@@ -61,33 +58,36 @@ function App() {
             index
             element={
               <Home
+                setInput={setInput}
+                Dropdown_Items={Dropdown_Items}
+                setDropdownValue={setDropdownValue}
+                dropdownValue={dropdownValue}
                 favorites={favorites}
                 setFavorites={setFavorites}
-                countries={countries}
-                setInput={setInput}
-                dropdownItems={dropdownItems}
+                countries={modifiedContent}
+                isLoading={isLoading}
               />
             }
           />
-
-          <Route path="country" element={<Details details={countryDetail} />} />
+          <Route path="country" element={<Details />} />
         </Routes>
       </BrowserRouter>
     </>
   );
 }
 
-export default App;
-
-function init(setIsDark, setFavorites, setCountries) {
-  getDarkStatus(setIsDark);
-  getFavorites(setFavorites);
-  getCountries(setCountries);
-}
-
-function getDarkStatus(setIsDark) {
-  const status = JSON.parse(localStorage.getItem("darkStatus"));
-  setIsDark(status);
+async function init(
+  setIsDark,
+  setFavorites,
+  setCountries,
+  setIsLoading,
+  setModifiedContent
+) {
+  setIsDark(JSON.parse(localStorage.getItem("darkStatus")));
+  setFavorites(getFavorites());
+  setCountries(await getCountries());
+  setModifiedContent(await getCountries());
+  setIsLoading(false);
 }
 
 function changeTheme(isDark) {
@@ -106,17 +106,32 @@ function changeTheme(isDark) {
   }
 }
 
-function getFavorites(setFavorites) {
+function Search(input, setCountries) {
+  clearTimeout(timeout);
+  timeout = setTimeout(async function () {
+    let result = [];
+    if (input !== "") {
+      result = await fetchByName(input);
+    } else {
+      result = await getCountries();
+    }
+    setCountries(result);
+  }, 1000);
+}
+
+function getFavorites() {
   const favoritesArray = JSON.parse(localStorage.getItem("favorites"));
   if (favoritesArray) {
-    setFavorites(favoritesArray);
+    return favoritesArray;
   }
 }
 
-async function getCountries(setCountries) {
+async function getCountries() {
   const res = await fetch("https://restcountries.com/v3.1/all")
     .then((response) => response.json())
     .catch((err) => console.log("Error is :" + err));
+
+  const arr = [];
 
   for (let i = 0; i < res.length; i++) {
     let population = res[i].population;
@@ -130,12 +145,36 @@ async function getCountries(setCountries) {
       flag: res[i].flags.svg,
       favorites: isFavorite,
     };
-    setCountries((items) => [...items, object]);
+    arr.push(object);
+  }
+
+  return arr;
+}
+
+function Filter(dropdownValue, countries, setModifiedContent, favorites) {
+  let result = [];
+  if (dropdownValue === "All") {
+    setModifiedContent(countries);
+  } else if (dropdownValue === "Favorite") {
+    for (let i = 0; i < favorites.length; i++) {
+      for (let j = 0; j < countries.length; j++) {
+        if (favorites[i].name === countries[j].name) {
+          result.push(countries[j]);
+        }
+      }
+    }
+    setModifiedContent(result);
+  } else {
+    for (let i = 0; i < countries.length; i++) {
+      if (countries[i].region === dropdownValue) {
+        result.push(countries[i]);
+      }
+    }
+    setModifiedContent(result);
   }
 }
 
 async function fetchByName(name) {
-  let arr = [];
   const res = await fetch(
     "https://restcountries.com/v3.1/name/" +
       name +
@@ -144,12 +183,13 @@ async function fetchByName(name) {
     .then((response) => response.json())
     .catch((err) => console.log("Error is :" + err));
 
-  for (let i = 0; i < res.length; i++) {
-    let n = res[i].population;
+  const arr = [];
 
+  for (let i = 0; i < res.length; i++) {
+    let population = res[i].population;
     const object = {
       name: res[i].name.common,
-      population: n.toLocaleString(),
+      population: population.toLocaleString(),
       region: res[i].region,
       capital: res[i].capital,
       flag: res[i].flags.svg,
@@ -158,11 +198,4 @@ async function fetchByName(name) {
   }
 
   return arr;
-}
-
-async function test(input, setCountries) {
-  if (input !== "") {
-    const arr = await fetchByName(input);
-    setCountries(arr);
-  }
 }

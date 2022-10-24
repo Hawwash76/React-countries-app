@@ -1,15 +1,17 @@
+import { useState, useEffect } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import BorderCountries from "../../Components/BorderCountries/BorderCountries";
 import { ReactComponent as BackIcon } from "../../assets/Icons/arrow-left-solid.svg";
-import DetailsItem from "../../Components/DetailsItem";
-import { useEffect, useState } from "react";
+import LabelWithText from "../../Components/LabelWithText/LabelWithText";
+import Loader from "../../Components/Loader/Loader";
+import Borders from "./Borders/Borders";
 
-export default function Details() {
+export default function Detail() {
   const [searchParams] = useSearchParams();
-  const [details,setDetails]=useState({});
+  const [details, setDetails] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    loadDetails(searchParams.get('name'),setDetails);
+    loadDetails(searchParams.get("name"), setDetails, setIsLoading);
   }, []);
 
   return (
@@ -20,56 +22,51 @@ export default function Details() {
           Back
         </Link>
       </div>
-      <section className="details-content">
-        <div className="details-img-wrapper">
-          <img
-            src={details.flag}
-            className="details-img"
-            alt="flag"
-          />
-        </div>
-        <div className="country-details">
-          <span className="country-details-header">{details.name}</span>
-          <div className="details-items">
-            <div>
-              <DetailsItem
-                decleration={"Native Name"}
-                data={details.nativeName}
-              />
-              <DetailsItem
-                decleration={"Population"}
-                data={details.population + ""}
-              />
-              <DetailsItem decleration={"Region"} data={details.region} />
-              <DetailsItem
-                decleration={"Sub Region"}
-                data={details.subRegion}
-              />
-              <DetailsItem decleration={"Capital"} data={details.capital} />
-            </div>
-            <div>
-              <DetailsItem
-                decleration={"Top Level Domain"}
-                data={details.tld}
-              />
-              <DetailsItem
-                decleration={"Currencies"}
-                data={details.currencies}
-              />
-              <DetailsItem decleration={"Languages"} data={details.languages} />
-            </div>
+
+      {isLoading ? (
+        <div style={{ marginTop: "10rem" }}>
+          <div className="loader-container">
+            <Loader />
           </div>
-          {/* <BorderCountries countries={details.borders} /> */}
         </div>
-      </section>
+      ) : (
+        <section className="details-content">
+          <div className="details-img-wrapper">
+            <img src={details.flag} className="details-img" alt="flag" />
+          </div>
+          <div className="country-details">
+            <span className="country-details-header">{details.name}</span>
+            <div className="details-items">
+              <div>
+                <LabelWithText
+                  label={"Native Name"}
+                  text={details.nativeName}
+                />
+                <LabelWithText
+                  label={"Population"}
+                  text={details.population + ""}
+                />
+                <LabelWithText label={"Region"} text={details.region} />
+                <LabelWithText label={"Sub Region"} text={details.subRegion} />
+              </div>
+              <div>
+                <LabelWithText label={"Top Level Domain"} text={details.tld} />
+                <LabelWithText label={"Currencies"} text={details.currencies} />
+                <LabelWithText label={"Languages"} text={details.languages} />
+              </div>
+            </div>
+            <Borders borders={details.borders} />
+          </div>
+        </section>
+      )}
     </div>
   );
 }
 
-async function loadDetails(name,setDetails) {
+async function loadDetails(params, setDetails, setIsLoading) {
   const res = await fetch(
     "https://restcountries.com/v3.1/name/" +
-      name +
+      params +
       "?fields=name,population,region,subregion,capital,tld,currencies,languages,flags,borders,"
   )
     .then((response) => response.json())
@@ -107,8 +104,8 @@ async function loadDetails(name,setDetails) {
     flag: res[0].flags.svg,
     borders: borders,
   };
-
-  setDetails(object)
+  setIsLoading(false);
+  setDetails(object);
 }
 
 async function getBorderName(border) {
@@ -120,4 +117,3 @@ async function getBorderName(border) {
 
   return res.name.common;
 }
-
