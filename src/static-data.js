@@ -1,4 +1,4 @@
-export const Dropdown_Items = [
+export const dropdownItems = [
   "All",
   "Favorite",
   "Africa",

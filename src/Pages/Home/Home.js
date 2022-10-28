@@ -1,20 +1,69 @@
+import { useState, useEffect } from "react";
+import {
+  Search,
+  getFavorites,
+  Filter,
+  updateFavorites,
+  getHomeContent,
+} from "../../functions/HomeFunction";
 import InputWithIcon from "../../Components/InuptWithIcon/InputWithIcon";
 import Dropdown from "../../Components/Dropdown/Dropdown";
 import Favorites from "./Favorites/Favorites";
-import { ReactComponent as SearchIcon } from "../../assets/Icons/magnifying-glass-solid.svg";
-import CardContainer from "./CardContainer/CardContainer";
 import Loader from "../../Components/Loader/Loader";
+import CardContainer from "./CardContainer/CardContainer";
+import { ReactComponent as SearchIcon } from "../../assets/Icons/magnifying-glass-solid.svg";
+import { dropdownItems } from "../../static-data.js";
 
-export default function Home({
-  setInput,
-  Dropdown_Items,
-  setDropdownValue,
-  dropdownValue,
-  favorites,
-  setFavorites,
-  countries,
-  isLoading,
-}) {
+export default function Home() {
+  const [input, setInput] = useState("");
+  const [dropdownValue, setDropdownValue] = useState("");
+  const [favorites, setFavorites] = useState([]);
+  const [countries, setCountries] = useState([]);
+  const [modifiedContent, setModifiedContent] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setFavorites(getFavorites());
+    getHomeContent()
+      .then((result) => {
+        setCountries(result);
+        setModifiedContent(result);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
+
+  useEffect(() => {
+    if (input === "") {
+      getHomeContent()
+        .then((result) => {
+          setCountries(result);
+          setModifiedContent(result);
+        })
+        .finally();
+    } else {
+      Search(input).then((result) => {
+        setCountries(result);
+        setModifiedContent(result);
+      });
+    }
+  }, [input]);
+
+  useEffect(() => {
+    updateFavorites(favorites);
+  }, [favorites]);
+
+  useEffect(() => {
+    const result = Filter(dropdownValue, countries, favorites);
+    setModifiedContent(result);
+    // eslint-disable-next-line
+  }, [dropdownValue, favorites]);
+
+  useEffect(() => {
+    setModifiedContent(countries);
+  }, [countries]);
+
   return (
     <div className="container home-wrapper">
       <section className="home-filter">
@@ -22,11 +71,11 @@ export default function Home({
           placeholder="Search for a country..."
           setInput={setInput}
         >
-          <SearchIcon className="searchicon" />
+          <SearchIcon />
         </InputWithIcon>
         <Dropdown
           placeholder="Filter by"
-          Dropdown_Items={Dropdown_Items}
+          dropdownItems={dropdownItems}
           setDropdownValue={setDropdownValue}
           dropdownValue={dropdownValue}
         />
@@ -39,9 +88,8 @@ export default function Home({
             <Loader />
           </div>
         ) : (
-          
           <CardContainer
-            countries={countries}
+            countries={modifiedContent}
             favorites={favorites}
             setFavorites={setFavorites}
           />

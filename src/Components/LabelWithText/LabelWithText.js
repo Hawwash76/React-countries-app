@@ -1,5 +1,4 @@
-export default function LebalWithText({ label, text }) {
-  let counter = 0;
+export default function LabelWithText({ label, text }) {
   if (typeof text === "string") {
     return (
       <p className="cardText">
@@ -10,10 +9,8 @@ export default function LebalWithText({ label, text }) {
     return (
       <p className="cardText">
         {label}:
-        {text.map(() => (
-          <span key={counter++} >
-            {text}
-          </span>
+        {text.map((item) => (
+          <span key={item}>{item}</span>
         ))}
       </p>
     );

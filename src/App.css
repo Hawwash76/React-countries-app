@@ -66,7 +66,7 @@
   width: 25rem;
 }
 
-.searchicon {
+.home-filter svg {
   fill: var(--Dark-Gray);
   width: 1rem;
   margin-inline: 0.6rem;
@@ -250,7 +250,7 @@
   color: var(--Font-primary);
 }
 
-.back-icon {
+.back-button svg {
   width: 1rem;
   margin-right: 1rem;
   fill: var(--Font-primary);

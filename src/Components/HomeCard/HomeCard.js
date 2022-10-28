@@ -46,6 +46,7 @@ export default function HomeCard({ country, favorites, setFavorites }) {
         boxShadow: "var(--box-shadow)",
         borderRadius: "var(--border-radius)",
         backgroundColor: "var(--White)",
+        maxWidth:'20rem'
       }}
       draggable={false}
     >

@@ -12,7 +12,7 @@ export default function CardContainer({ countries, favorites, setFavorites }) {
           sm={12}
           md={6}
           lg={4}
-          xl={4}
+          xl={3}
           sx={{
             paddingTop: 0,
           }}

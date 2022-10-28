@@ -6,7 +6,7 @@ import InputLabel from "@mui/material/InputLabel";
 
 export default function Dropdown({
   placeholder,
-  Dropdown_Items,
+  dropdownItems,
   setDropdownValue,
   dropdownValue,
 }) {
@@ -37,9 +37,9 @@ export default function Dropdown({
           "& fieldset": { border: "none" },
         }}
       >
-        {Dropdown_Items.map((item) => (
-          <MenuItem value={item} key={counter++}>
-            {item}{" "}
+        {dropdownItems.map((item) => (
+          <MenuItem value={item} key={item}>
+            {item}
           </MenuItem>
         ))}
       </Select>
