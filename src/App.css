@@ -14,6 +14,10 @@
   text-decoration: none;
 }
 
+.lighter-opacity {
+  opacity: 0.5;
+}
+
 /*------------------- Header -------------------*/
 
 .header {
@@ -191,11 +195,11 @@
   padding-left: 2rem;
 }
 
-.MuiGrid2-root{
+.MuiGrid2-root {
   padding-top: 0 !important;
 }
 
-.empty-countries{
+.empty-countries {
   color: var(--Font-primary);
   background-color: var(--White);
   height: fit-content;
@@ -411,6 +415,15 @@
   .grid-container {
     width: 100%;
     margin-left: 0rem !important;
+  }
+
+  .MuiGrid2-root {
+    justify-content: center !important;
+    width: fit-content !important;
+  }
+
+  .card {
+    min-width: 20rem;
   }
 
   .details-content {

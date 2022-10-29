@@ -39,7 +39,8 @@ export default function HomeCard({ country, favorites, setFavorites }) {
         to={`/country?name=${country.name}`}
         className="link"
         draggable
-        onDragStart={(event) => getCardInfo(event, country.name, country.flag)}
+        onDragStart={(event) => getCardInfo(event, country.name, country.flag)} 
+        onDragEnd={(event) => event.target.classList.remove("lighter-opacity")}
       >
         <CardMedia
           component="img"
