@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/React-countries-app/static/css/main.550efc0e.css",
-    "main.js": "/React-countries-app/static/js/main.68c3effa.js",
+    "main.css": "/React-countries-app/static/css/main.6baa25f2.css",
+    "main.js": "/React-countries-app/static/js/main.bf00e3a3.js",
     "static/js/787.c1112931.chunk.js": "/React-countries-app/static/js/787.c1112931.chunk.js",
     "index.html": "/React-countries-app/index.html",
     "static/media/moon-regular.svg": "/React-countries-app/static/media/moon-regular.14fcec0f2873bd6ac5989d5e24370186.svg",
     "static/media/star-solid.svg": "/React-countries-app/static/media/star-solid.a6dc763d42bd03b280e55b40beb3f579.svg",
     "static/media/magnifying-glass-solid.svg": "/React-countries-app/static/media/magnifying-glass-solid.cf315284d6e0edc1c7686864aa6da0bc.svg",
     "static/media/arrow-left-solid.svg": "/React-countries-app/static/media/arrow-left-solid.24c9e4bd83cd574a8e45071e9119e6de.svg",
-    "main.550efc0e.css.map": "/React-countries-app/static/css/main.550efc0e.css.map",
-    "main.68c3effa.js.map": "/React-countries-app/static/js/main.68c3effa.js.map",
+    "main.6baa25f2.css.map": "/React-countries-app/static/css/main.6baa25f2.css.map",
+    "main.bf00e3a3.js.map": "/React-countries-app/static/js/main.bf00e3a3.js.map",
     "787.c1112931.chunk.js.map": "/React-countries-app/static/js/787.c1112931.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.550efc0e.css",
-    "static/js/main.68c3effa.js"
+    "static/css/main.6baa25f2.css",
+    "static/js/main.bf00e3a3.js"
   ]
 }
