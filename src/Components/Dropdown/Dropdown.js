@@ -10,7 +10,6 @@ export default function Dropdown({
   setDropdownValue,
   dropdownValue,
 }) {
-  let counter = 0;
   return (
     <FormControl hiddenLabel className="dropdown" sx={{ minWidth: 80 }}>
       <InputLabel

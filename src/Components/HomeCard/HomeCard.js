@@ -5,36 +5,20 @@ import Typography from "@mui/material/Typography";
 import LabelWithText from "../LabelWithText/LabelWithText";
 import { Link } from "react-router-dom";
 import { ReactComponent as StarIcon } from "../../assets/Icons/star-solid.svg";
+import { getCardInfo } from "../../functions/HomeFunction";
+import { checkStar } from "../../functions/HomeFunction";
 
 export default function HomeCard({ country, favorites, setFavorites }) {
-  let isFav = false;
-
-  if (favorites.some((item) => item.name === country.name)) {
-    isFav = true;
-  }
-
-  const getInfo = (event) => {
-    const data = {
-      name: country.name,
-      flag: country.flag,
-    };
-    event.dataTransfer.setData("text", JSON.stringify(data));
-  };
-
   const handleFavorites = (event) => {
-    if (event.target.parentNode.classList.contains("selected")) {
-      event.target.parentNode.classList.remove("selected");
+    if (checkStar(event)) {
       setFavorites(favorites.filter((item) => item.name !== country.name));
     } else {
-      event.target.parentNode.classList.add("selected");
-      const data = {
-        name: country.name,
-        flag: country.flag,
-      };
-      const favoritesArray = favorites;
-      const found = favoritesArray.some((el) => el.name === data.name);
+      const found = favorites.some((el) => el.name === country.name);
       if (!found) {
-        setFavorites((favorites) => [...favorites, data]);
+        setFavorites((favorites) => [
+          ...favorites,
+          { name: country.name, flag: country.flag },
+        ]);
       }
     }
   };
@@ -46,7 +30,8 @@ export default function HomeCard({ country, favorites, setFavorites }) {
         boxShadow: "var(--box-shadow)",
         borderRadius: "var(--border-radius)",
         backgroundColor: "var(--White)",
-        maxWidth:'20rem'
+        maxWidth: "20rem",
+        minHeight: "20rem",
       }}
       draggable={false}
     >
@@ -54,7 +39,7 @@ export default function HomeCard({ country, favorites, setFavorites }) {
         to={`/country?name=${country.name}`}
         className="link"
         draggable
-        onDragStart={getInfo}
+        onDragStart={(event) => getCardInfo(event, country.name, country.flag)}
       >
         <CardMedia
           component="img"
@@ -78,7 +63,7 @@ export default function HomeCard({ country, favorites, setFavorites }) {
         </CardContent>
       </Link>
       <div className="card-icon">
-        {isFav ? (
+        {country.isFav ? (
           <StarIcon className="star-icon selected" onClick={handleFavorites} />
         ) : (
           <StarIcon className="star-icon" onClick={handleFavorites} />

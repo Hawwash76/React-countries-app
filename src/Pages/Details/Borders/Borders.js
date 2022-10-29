@@ -1,7 +1,6 @@
 import BorderItem from "../../../Components/BorderItem/BorderItem";
 
 export default function Borders({ borders }) {
-  let counter = 0;
   return (
     <div className="border-countries">
       <span>Border Countries:</span>

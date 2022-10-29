@@ -18,6 +18,7 @@ export default function Detail() {
         setIsLoading(false);
       })
       .finally();
+    // eslint-disable-next-line
   }, []);
 
   return (

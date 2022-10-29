@@ -72,6 +72,25 @@ function extractContent(object) {
     capital: object.capital,
     flag: object.flags.svg,
     id: object.cca3,
+    isFav: false,
   };
   return result;
+}
+
+export function getCardInfo(event, name, flag) {
+  const data = {
+    name: name,
+    flag: flag,
+  };
+  event.dataTransfer.setData("text", JSON.stringify(data));
+}
+
+export function checkStar(event) {
+  if (event.target.parentNode.classList.contains("selected")) {
+    event.target.parentNode.classList.remove("selected");
+    return true;
+  } else {
+    event.target.parentNode.classList.add("selected");
+    return false;
+  }
 }

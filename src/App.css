@@ -47,6 +47,8 @@
   color: var(--Font-primary);
   font-size: 1rem;
   font-weight: var(--weight-semi);
+  display: flex;
+  cursor: pointer;
 }
 
 /*------------------- Home_Filter -------------------*/
@@ -77,6 +79,14 @@
   border-radius: var(--border-radius);
   box-shadow: var(--box-shadow);
   width: 12rem;
+}
+
+.css-6hp17o-MuiList-root-MuiMenu-list,
+.css-1poimk-MuiPaper-root-MuiMenu-paper-MuiPaper-root-MuiPopover-paper {
+  margin-top: 0.5rem !important;
+  background-color: var(--White) !important;
+  color: var(--Font-primary);
+  border-radius: var(--border-radius) !important;
 }
 
 /*------------------- Home_Main -------------------*/
@@ -181,6 +191,18 @@
   padding-left: 2rem;
 }
 
+.MuiGrid2-root{
+  padding-top: 0 !important;
+}
+
+.empty-countries{
+  color: var(--Font-primary);
+  background-color: var(--White);
+  height: fit-content;
+  padding: 1rem;
+  font-size: 1.3rem;
+}
+
 .cardHeader {
   color: var(--Font-primary);
   font-weight: var(--weight-semi) !important;
@@ -257,7 +279,7 @@
 }
 
 .details-img-wrapper {
-  max-width: 100%;
+  max-width: 45rem;
 }
 
 .details-img {

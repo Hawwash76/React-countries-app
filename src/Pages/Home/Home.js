@@ -24,9 +24,11 @@ export default function Home() {
 
   useEffect(() => {
     setFavorites(getFavorites());
+
     getHomeContent()
       .then((result) => {
         setCountries(result);
+        //
         setModifiedContent(result);
       })
       .finally(() => {
@@ -52,15 +54,21 @@ export default function Home() {
 
   useEffect(() => {
     updateFavorites(favorites);
+    //
   }, [favorites]);
 
   useEffect(() => {
     const result = Filter(dropdownValue, countries, favorites);
     setModifiedContent(result);
     // eslint-disable-next-line
-  }, [dropdownValue, favorites]);
+  }, [dropdownValue]);
 
   useEffect(() => {
+    for (let country of countries) {
+      if (favorites.some((item) => item.name === country.name)) {
+        country.isFav = true;
+      }
+    }
     setModifiedContent(countries);
   }, [countries]);
 
@@ -82,7 +90,6 @@ export default function Home() {
       </section>
       <section className="main-content">
         <Favorites favorites={favorites} setFavorites={setFavorites} />
-
         {isLoading ? (
           <div className="loader-container">
             <Loader />
