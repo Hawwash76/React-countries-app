@@ -31,7 +31,7 @@ export default function HomeCard({ country, favorites, setFavorites }) {
         borderRadius: "var(--border-radius)",
         backgroundColor: "var(--White)",
         maxWidth: "20rem",
-        minHeight: "20rem",
+        minHeight: "21.5rem",
       }}
       draggable={false}
     >
@@ -39,7 +39,7 @@ export default function HomeCard({ country, favorites, setFavorites }) {
         to={`/country?name=${country.name}`}
         className="link"
         draggable
-        onDragStart={(event) => getCardInfo(event, country.name, country.flag)} 
+        onDragStart={(event) => getCardInfo(event, country.name, country.flag)}
         onDragEnd={(event) => event.target.classList.remove("lighter-opacity")}
       >
         <CardMedia
@@ -58,9 +58,11 @@ export default function HomeCard({ country, favorites, setFavorites }) {
           >
             {country.name}
           </Typography>
-          <LabelWithText label={"Population"} text={country.population} />
-          <LabelWithText label={"Region"} text={country.region} />
-          <LabelWithText label={"Capital"} text={country.capital} />
+          <div className="card-content">
+            <LabelWithText label={"Population"} text={country.population} />
+            <LabelWithText label={"Region"} text={country.region} />
+            <LabelWithText label={"Capital"} text={country.capital} />
+          </div>
         </CardContent>
       </Link>
       <div className="card-icon">

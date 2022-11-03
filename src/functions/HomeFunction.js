@@ -67,7 +67,7 @@ export async function getHomeContent() {
 function extractContent(object) {
   const result = {
     name: object.name.common,
-    population: object.population,
+    population: object.population.toLocaleString(),
     region: object.region,
     capital: object.capital,
     flag: object.flags.svg,
@@ -83,8 +83,8 @@ export function getCardInfo(event, name, flag) {
     flag: flag,
   };
   event.dataTransfer.setData("text", JSON.stringify(data));
-  event.target.classList.add('lighter-opacity')
-  console.log(event.target.classList)
+  event.target.classList.add("lighter-opacity");
+  console.log(event.target.classList);
 }
 
 export function checkStar(event) {

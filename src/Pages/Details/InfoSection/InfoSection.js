@@ -7,9 +7,11 @@ export default function InfoSection({ details }) {
       <div className="details-items">
         <div>
           <LabelWithText label={"Native Name"} text={details.nativeName} />
-          <LabelWithText label={"Population"} text={details.population + ""} />
+          <LabelWithText label={"Population"} text={details.population} />
           <LabelWithText label={"Region"} text={details.region} />
           <LabelWithText label={"Sub Region"} text={details.subRegion} />
+          <LabelWithText label={"Capital"} text={details.capital} />
+
         </div>
         <div>
           <LabelWithText label={"Top Level Domain"} text={details.tld} />

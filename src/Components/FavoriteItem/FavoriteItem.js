@@ -2,7 +2,9 @@ export default function FavoriteItem({ name, flag, favorites, setFavorites }) {
   return (
     <div className="favorite-item">
       <div>
-        <img src={flag} className="rounded-border" alt="flag" />
+        <div className="favorite-item-img-wrapper">
+          <img src={flag} className="rounded-border" alt="flag" />
+        </div>
         <span>{name}</span>
       </div>
       <button
@@ -10,7 +12,7 @@ export default function FavoriteItem({ name, flag, favorites, setFavorites }) {
           setFavorites(favorites.filter((item) => item.name !== name))
         }
       >
-        x
+        <span>x</span>
       </button>
     </div>
   );

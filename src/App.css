@@ -105,7 +105,7 @@
   margin-right: 2rem;
   background-color: var(--White);
   padding: 1rem;
-  width: 20rem;
+  width: 23rem;
   color: var(--Font-primary);
 }
 
@@ -116,9 +116,10 @@
 
 .favorites-item-container {
   margin-top: 1rem;
-  height: 100%;
+  height: 28rem;
   overflow: hidden;
   overflow-y: auto;
+  padding-right: 0.5rem;
 }
 
 .favorites-item-container::-webkit-scrollbar {
@@ -127,7 +128,6 @@
 
 .favorites-item-container::-webkit-scrollbar-thumb {
   background-color: rgba(128, 128, 128, 0.475);
-
   border: 0.15rem solid transparent;
   border-radius: 9px;
   background-clip: content-box;
@@ -154,18 +154,34 @@
   gap: 1rem;
 }
 
-.favorite-item button {
-  border-radius: 100%;
-  width: 1.3rem;
-  height: 1.3rem;
-  background-color: var(--Button-clr);
-  border-style: none;
-  font-weight: var(--weight-semi);
-  color: inherit;
+.favorite-item-img-wrapper {
+  max-width: 2.5rem;
 }
 
-.favorite-item img {
-  width: 2.5rem;
+.favorite-item-img-wrapper img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.favorite-item span {
+  font-size: 0.8rem;
+  font-weight: var(--weight-semi);
+}
+
+.favorite-item button {
+  height: 1.3rem;
+  width: 1.3rem;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  background-color: var(--Button-clr);
+  border-style: none;
+  color: var(--Font-primary);
+}
+
+.favorite-item button span {
+  font-weight: var(--weight-bold);
+  color: inherit;
 }
 
 .grid-container {
@@ -182,7 +198,6 @@
 
 .grid-container::-webkit-scrollbar-thumb {
   background-color: rgba(128, 128, 128, 0.475);
-
   border: 0.15rem solid transparent;
   border-radius: 9px;
   background-clip: content-box;
@@ -207,20 +222,33 @@
   font-size: 1.3rem;
 }
 
+/* .card{
+  background-color: red !important;
+  min-width: 20rem;
+  margin: 1rem;
+} */
+
 .cardHeader {
   color: var(--Font-primary);
   font-weight: var(--weight-semi) !important;
-  margin-bottom: 0.5rem;
-  font-size: 1.2rem !important;
+  margin-bottom: 1rem !important;
+  font-size: 1rem !important;
 }
 
-.cardText {
+.card-content .label-with-items-wrapper {
   display: flex;
-  gap: 0.2rem;
   color: var(--Font-primary);
-  font-size: 0.85rem;
+  font-size: 0.9rem;
+  margin-bottom: 0.2rem;
+}
+
+.card-content .label-with-items-wrapper p {
   font-weight: var(--weight-semi);
-  margin-top: 0.3rem;
+}
+
+.card-content .label-with-items-wrapper span {
+  margin-left: 0.3rem;
+  color: var(--Font-secondary);
 }
 
 .css-1biuimg-MuiCardContent-root {
@@ -228,18 +256,6 @@
   padding-inline: 1.3rem !important;
   padding-top: 1.5rem !important;
   padding-bottom: 1.5rem !important;
-}
-
-.cardText:nth-child(1) {
-  margin-top: 1rem;
-}
-
-.cardText p {
-  font-weight: var(--weight-semi);
-}
-
-.cardText span {
-  color: var(--Font-secondary);
 }
 
 .card-icon {
@@ -283,13 +299,13 @@
 }
 
 .details-img-wrapper {
-  max-width: 45rem;
+  max-width: 40rem;
+  min-width: 30rem;
 }
 
 .details-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
 }
 
 .details-content {
@@ -301,10 +317,11 @@
 
 .country-details {
   padding: 3rem;
+  margin-left: 3rem;
 }
 
 .country-details-header {
-  font-size: 1.8rem;
+  font-size: 1.9rem;
   font-weight: var(--weight-bold);
 }
 
@@ -314,23 +331,29 @@
   gap: 5rem;
 }
 
-.details-items p {
-  margin-bottom: 0.4rem;
+.details-items .label-with-items-wrapper {
+  display: flex;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
 }
 
-.details-item-decleration {
+.details-items .label-with-items-wrapper p {
   font-weight: var(--weight-semi);
 }
 
-.details-item-data {
-  font-weight: var(--weight-light);
-  margin-left: 0.3rem;
+.details-items .label-with-items-wrapper span {
+  margin-left: 0.5rem;
+  color: var(--Font-secondary);
 }
 
 .border-countries {
   margin-top: 4rem;
   display: flex;
   align-items: center;
+}
+
+.border-countries span {
+  margin-bottom: 2rem;
 }
 
 .border-countries span {
@@ -342,6 +365,28 @@
   display: flex;
   margin-left: 1rem;
   gap: 1rem;
+  max-width: 30rem;
+  overflow-x: scroll;
+  padding-bottom: 1rem;
+}
+
+.border-countries-items::-webkit-scrollbar {
+  width: 0.7rem;
+}
+
+.border-countries-items::-webkit-scrollbar-thumb {
+  background-color: rgba(128, 128, 128, 0.475);
+  border: 0.25rem solid transparent;
+  border-radius: 9px;
+  background-clip: content-box;
+  height: 1.5rem;
+}
+
+.border-countries-items::-webkit-scrollbar-track {
+  border-left: 0.05rem solid rgba(160, 160, 160, 0.203);
+  border-right: 0.05rem solid rgba(160, 160, 160, 0.203);
+  padding-left: 2rem;
+  border-style: none;
 }
 
 .border-countries-item {
@@ -378,7 +423,6 @@
     transform: rotate(360deg);
   }
 }
-
 /* mobile */
 
 @media only screen and (max-width: 800px) {
@@ -397,7 +441,11 @@
   .home-filter {
     flex-direction: column;
     align-items: flex-start;
-    gap: 2rem;
+    gap: 3rem;
+  }
+
+  .home-wrapper {
+    margin-top: 0;
   }
 
   .input {
@@ -409,12 +457,13 @@
   }
 
   .header-text {
-    font-size: 1rem;
+    font-size: 1.3rem;
   }
 
   .grid-container {
     width: 100%;
     margin-left: 0rem !important;
+    margin-top: 0.8rem !important;
   }
 
   .MuiGrid2-root {
@@ -423,7 +472,7 @@
   }
 
   .card {
-    min-width: 20rem;
+    min-width: 20rem !important;
   }
 
   .details-content {
@@ -459,5 +508,11 @@
 
   .css-1biuimg-MuiCardContent-root {
     padding-bottom: 0rem !important;
+  }
+}
+
+@media (min-width: 2000px) {
+  .css-1gja677-MuiGrid2-root {
+    width: calc(100% * 3 / 12) !important;
   }
 }
