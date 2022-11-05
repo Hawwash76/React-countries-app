@@ -4,7 +4,7 @@ import Header from "./Pages/Header/Header";
 import Home from "./Pages/Home/Home";
 import Details from "./Pages/Details/Details";
 import { useState, useEffect } from "react";
-import { changeTheme } from "./functions/ThemeFunctions";
+import { changeTheme } from "./utils/Theme";
 
 export default function App() {
   const [isDark, setIsDark] = useState(false);

@@ -5,8 +5,7 @@ import Typography from "@mui/material/Typography";
 import LabelWithText from "../LabelWithText/LabelWithText";
 import { Link } from "react-router-dom";
 import { ReactComponent as StarIcon } from "../../assets/Icons/star-solid.svg";
-import { getCardInfo } from "../../functions/HomeFunction";
-import { checkStar } from "../../functions/HomeFunction";
+import { getCardInfo,checkStar } from "../../utils/Home";
 
 export default function HomeCard({ country, favorites, setFavorites }) {
   const handleFavorites = (event) => {

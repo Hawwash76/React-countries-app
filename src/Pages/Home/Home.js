@@ -5,7 +5,7 @@ import {
   Filter,
   updateFavorites,
   getHomeContent,
-} from "../../functions/HomeFunction";
+} from "../../utils/Home";
 import InputWithIcon from "../../Components/InuptWithIcon/InputWithIcon";
 import Dropdown from "../../Components/Dropdown/Dropdown";
 import Favorites from "./Favorites/Favorites";

@@ -349,6 +349,7 @@
   margin-top: 4rem;
   display: flex;
   align-items: center;
+  margin-bottom: 2rem;
 }
 
 .border-countries span {
@@ -429,10 +430,13 @@
     padding: 1.5rem 5rem;
   }
 
+  .details-container {
+    padding: 0rem 10rem;
+  }
+
   .details-content {
     flex-direction: column;
     width: fit-content;
-    margin-inline: 5rem;
   }
 
   .country-details {
@@ -459,17 +463,28 @@
   .border-countries {
     flex-direction: column;
     align-items: flex-start;
+    width: 100%;
   }
 
   .border-countries-items {
-    margin-top: 1rem;
     margin-left: 0rem;
-    width: 100%;
-    justify-content: center;
+    /* max-width: 40rem; */
   }
 }
 
 @media only screen and (max-width: 800px) {
+  .border-countries span {
+    margin-bottom: 0rem;
+  }
+
+  .details-container {
+    padding: 0rem 2rem;
+  }
+
+  .css-1gja677-MuiGrid2-root {
+    display: flex;
+  }
+
   .loader-container {
     margin-bottom: 20rem;
   }
@@ -534,6 +549,16 @@
   .details-items {
     flex-direction: column;
     gap: 2rem;
+  }
+
+  .border-countries-items {
+    margin-top: 1rem;
+    max-width: 19rem;
+  }
+
+  .details-img-wrapper {
+    max-width: 25rem;
+    min-width: 17rem;
   }
 }
 

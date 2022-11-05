@@ -1,7 +1,7 @@
 import { Link, useSearchParams } from "react-router-dom";
 import { ReactComponent as BackIcon } from "../../assets/Icons/arrow-left-solid.svg";
 import { useState, useEffect } from "react";
-import { getDetails } from "../../functions/DetailsFnctions";
+import { getDetails } from "../../utils/Details";
 import Loader from "../../Components/Loader/Loader";
 import ImageContainer from "./ImageContainer/ImageContainer";
 import InfoSection from "./InfoSection/InfoSection";
