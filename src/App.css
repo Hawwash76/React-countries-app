@@ -222,12 +222,6 @@
   font-size: 1.3rem;
 }
 
-/* .card{
-  background-color: red !important;
-  min-width: 20rem;
-  margin: 1rem;
-} */
-
 .cardHeader {
   color: var(--Font-primary);
   font-weight: var(--weight-semi) !important;
@@ -280,6 +274,10 @@
 
 .details-container {
   margin-top: 2rem;
+  padding: 0rem 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .back-button {
@@ -298,21 +296,21 @@
   fill: var(--Font-primary);
 }
 
+.details-content {
+  margin-top: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--Font-primary);
+}
+
 .details-img-wrapper {
   max-width: 40rem;
-  min-width: 30rem;
 }
 
 .details-img {
   width: 100%;
   height: 100%;
-}
-
-.details-content {
-  margin-top: 4rem;
-  display: flex;
-  justify-content: center;
-  color: var(--Font-primary);
 }
 
 .country-details {
@@ -425,6 +423,51 @@
 }
 /* mobile */
 
+@media only screen and (max-width: 1150px) {
+  .container {
+    padding: 1.5rem 5rem;
+  }
+
+  .details-content {
+    flex-direction: column;
+    width: fit-content;
+    margin-inline: 5rem;
+  }
+
+  .country-details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 0rem;
+    margin-top: 2rem;
+    margin-left: 0;
+  }
+
+  .country-details-header {
+    text-align: left;
+    width: 100%;
+  }
+
+  .details-items {
+    gap: 2rem;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .border-countries {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .border-countries-items {
+    margin-top: 1rem;
+    margin-left: 0rem;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 @media only screen and (max-width: 800px) {
   .loader-container {
     margin-bottom: 20rem;
@@ -446,6 +489,10 @@
 
   .home-wrapper {
     margin-top: 0;
+  }
+
+  .details-content {
+    margin-left: 0rem;
   }
 
   .input {
@@ -475,39 +522,17 @@
     min-width: 20rem !important;
   }
 
-  .details-content {
-    flex-direction: column;
-  }
-
-  .details-items {
-    flex-direction: column;
-    gap: 2rem;
-  }
-
-  .country-details {
-    padding: 0rem;
-    text-align: start;
-    margin-top: 2rem;
-  }
-
-  .border-countries {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .border-countries-items {
-    margin-top: 1rem;
-    margin-left: 0rem;
-    width: 100%;
-    justify-content: center;
-  }
-
   .star-icon {
     display: block;
   }
 
   .css-1biuimg-MuiCardContent-root {
     padding-bottom: 0rem !important;
+  }
+
+  .details-items {
+    flex-direction: column;
+    gap: 2rem;
   }
 }
 

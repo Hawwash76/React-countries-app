@@ -22,7 +22,7 @@ export default function Detail() {
   }, []);
 
   return (
-    <div className="container details-container">
+    <div className="details-container">
       <div className="back-button-container">
         <Link className="back-button rounded-border box-shadow link" to="/">
           <BackIcon />
