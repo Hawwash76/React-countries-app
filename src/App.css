@@ -306,6 +306,7 @@
 
 .details-img-wrapper {
   max-width: 40rem;
+  min-width: 17rem;
 }
 
 .details-img {
