@@ -6,7 +6,6 @@ export default function ButtonWithIcon({ children, text, isDark, setIsDark }) {
         onClick={() => (isDark ? setIsDark(false) : setIsDark(true))}
       >
         {children}
-
         {text}
       </button>
     </div>

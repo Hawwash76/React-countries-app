@@ -54,7 +54,6 @@ export default function Home() {
 
   useEffect(() => {
     updateFavorites(favorites);
-    //
   }, [favorites]);
 
   useEffect(() => {
@@ -70,6 +69,7 @@ export default function Home() {
       }
     }
     setModifiedContent(countries);
+    // eslint-disable-next-line
   }, [countries]);
 
   return (
