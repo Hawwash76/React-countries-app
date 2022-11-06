@@ -11,18 +11,10 @@ export async function getDetails(name) {
 }
 
 export async function extractDetails(object) {
-  let nativeName = object.name.nativeName;
-  let currencies = object.currencies;
-  let borders = [];
-  for (let i = 0; i < object.borders.length; i++) {
-    borders[i] = await getBorderName(object.borders[i]);
-  }
-
-  let languages = [];
-  for (const langauge in object.languages) {
-    languages.push(object.languages[langauge]);
-  }
-
+  const nativeName = object.name.nativeName;
+  const currencies = object.currencies;
+  const borders = await refactorBorders(object.borders);
+  const languages = refactorLanguages(object.languages);
 
   const result = {
     name: object.name.common,
@@ -49,4 +41,21 @@ export async function getBorderName(name) {
     .catch((err) => console.log("Error is :" + err));
 
   return res.name.common;
+}
+
+async function refactorBorders(borders) {
+  let result = [];
+  for (let i = 0; i < borders.length; i++) {
+    result[i] = await getBorderName(borders[i]);
+  }
+
+  return result;
+}
+
+function refactorLanguages(languages) {
+  let result = [];
+  for (const langauge in languages) {
+    result.push(languages[langauge]);
+  }
+  return result;
 }
